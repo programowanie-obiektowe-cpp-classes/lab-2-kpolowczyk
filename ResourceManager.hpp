@@ -17,6 +17,22 @@ public:
         delete resource_ptr;
     }
 
+    // Konstruktor kopiujący
+    ResourceManager(const ResourceManager& other)
+    {
+        resource_ptr = new Resource(*other.resource_ptr);
+    }
+
+    // Operator przypisania kopiującego
+    ResourceManager& operator=(const ResourceManager& other)
+    {
+        if (this != &other) {
+            delete resource_ptr; // Zwolnienie istniejącego zasobu
+            resource_ptr = new Resource(*other.resource_ptr); // Kopiowanie zasobu
+        }
+        return *this;
+    }
+
     // Funkcja dostępu do zasobu bezpośrednio z pola tablicy `tab`
     double getResourceValue() const
     {
